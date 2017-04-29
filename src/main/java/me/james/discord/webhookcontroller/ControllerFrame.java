@@ -106,5 +106,6 @@ public class ControllerFrame extends JFrame
         message.setEnabled( in );
         tts.setEnabled( in );
         sendBtn.setEnabled( in );
+        addEmbedBtn.setEnabled( in );
     }
 }
