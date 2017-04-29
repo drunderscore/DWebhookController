@@ -101,12 +101,15 @@ public class ControllerFrame extends JFrame
                         response = WebhookUtils.makeWebhookRequest( webhookLink.getText(), message.getText(), tts.isSelected(), username.getText(), embeds.toArray( new EmbedContent[embeds.size()] ) );
                     else
                         response = WebhookUtils.makeWebhookRequest( webhookLink.getText(), message.getText(), tts.isSelected(), username.getText() );
-                    message.setText( "" );
-                    embeds.clear();
                     if ( response != null )
                     {
                         String content = ( response.getEntity() != null ? IOUtils.toString( response.getEntity().getContent() ) : null );
                         JOptionPane.showMessageDialog( this, "The request returned status " + response.getStatusLine().toString() + ", with " + ( content != null ? "the following content:\n" + content : "no content." ), "Request Response", JOptionPane.INFORMATION_MESSAGE );
+                        if ( response.getStatusLine().getStatusCode() < 300 )
+                        {
+                            message.setText( "" );
+                            embeds.clear();
+                        }
                     }
                 } catch ( IOException | IllegalArgumentException e1 )
                 {

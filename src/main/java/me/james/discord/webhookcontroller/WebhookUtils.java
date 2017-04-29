@@ -4,7 +4,6 @@ import com.google.gson.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import org.apache.commons.io.*;
 import org.apache.commons.lang3.exception.*;
 import org.apache.http.*;
 import org.apache.http.client.entity.*;
@@ -30,7 +29,7 @@ public class WebhookUtils
         HttpResponse response = client.execute( req );
         Start.LOG.info( "Made webhook request (" + req.getMethod() + "), status: " + response.getStatusLine().toString() );
         if ( response.getStatusLine().getStatusCode() >= 300 )
-            Start.LOG.warning( "Request returned non-OK status with the following content:\n" + IOUtils.toString( response.getEntity().getContent() ) );
+            Start.LOG.warning( "Request returned non-OK status. (" + url + ")" );
         return response;
     }
 
@@ -62,7 +61,7 @@ public class WebhookUtils
         HttpResponse response = client.execute( req );
         Start.LOG.info( "Made webhook request (" + req.getMethod() + "), status: " + response.getStatusLine().toString() );
         if ( response.getStatusLine().getStatusCode() >= 300 )
-            Start.LOG.warning( "Request returned non-OK status with the following content:\n" + IOUtils.toString( response.getEntity().getContent() ) );
+            Start.LOG.warning( "Request returned non-OK status. (" + url + ")" );
         return response;
     }
 
