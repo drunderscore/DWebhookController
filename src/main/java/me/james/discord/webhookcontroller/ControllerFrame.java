@@ -3,6 +3,7 @@ package me.james.discord.webhookcontroller;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.*;
 import java.util.*;
 import javax.swing.*;
 import org.apache.commons.io.*;
@@ -20,7 +21,7 @@ public class ControllerFrame extends JFrame
 
     public ControllerFrame()
     {
-        setSize( 650, 250 );
+        setSize( 650, 270 );
         setLocationRelativeTo( null );
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setTitle( "Discord Webhook Controller" );
@@ -30,8 +31,8 @@ public class ControllerFrame extends JFrame
         webhookLink.setLocation( 80, 3 );
         username.setSize( 150, 20 );
         username.setLocation( 80, 28 );
-        message.setSize( getWidth(), 200 );
-        message.setLocation( 0, getHeight() - message.getHeight() );
+        message.setSize( getWidth(), 175 );
+        message.setLocation( 0, 50 );
         message.setLineWrap( true );
         message.setFont( Font.getFont( "Arial" ) );
         JLabel webhookLabel = new JLabel( "Webhook Link" );
@@ -40,6 +41,50 @@ public class ControllerFrame extends JFrame
         JLabel usernameLabel = new JLabel( "Username" );
         usernameLabel.setSize( 100, 20 );
         usernameLabel.setLocation( 5, 25 );
+        JLabel authorLabel = new JLabel( "© 2017 James Puleo (click for more info)" );
+        authorLabel.setForeground( Color.BLUE );
+        authorLabel.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+        authorLabel.setSize( 200, 20 );
+        authorLabel.setLocation( 3, 223 );
+        authorLabel.addMouseListener( new MouseListener()
+        {
+            @Override
+            public void mouseClicked( MouseEvent e )
+            {
+                if ( Desktop.isDesktopSupported() )
+                    try
+                    {
+                        Desktop.getDesktop().browse( URI.create( "https://github.com/electricman226" ) );
+                    } catch ( IOException e1 )
+                    {
+                        e1.printStackTrace();
+                    }
+            }
+
+            @Override
+            public void mousePressed( MouseEvent e )
+            {
+
+            }
+
+            @Override
+            public void mouseReleased( MouseEvent e )
+            {
+
+            }
+
+            @Override
+            public void mouseEntered( MouseEvent e )
+            {
+
+            }
+
+            @Override
+            public void mouseExited( MouseEvent e )
+            {
+
+            }
+        } );
         sendBtn.setSize( 250, 26 );
         sendBtn.setLocation( 280, 24 );
         sendBtn.addActionListener( e ->
@@ -61,7 +106,7 @@ public class ControllerFrame extends JFrame
                     if ( response != null )
                     {
                         String content = ( response.getEntity() != null ? IOUtils.toString( response.getEntity().getContent() ) : null );
-                        JOptionPane.showMessageDialog( this, "Thr request returned status " + response.getStatusLine().toString() + ", with " + ( content != null ? "the following content:\n" + content : "no content." ), "Request Response", JOptionPane.INFORMATION_MESSAGE );
+                        JOptionPane.showMessageDialog( this, "The request returned status " + response.getStatusLine().toString() + ", with " + ( content != null ? "the following content:\n" + content : "no content." ), "Request Response", JOptionPane.INFORMATION_MESSAGE );
                     }
                 } catch ( IOException | IllegalArgumentException e1 )
                 {
@@ -89,6 +134,7 @@ public class ControllerFrame extends JFrame
         tts.setSize( 45, 20 );
         tts.setLocation( 233, 27 );
         add( webhookLabel );
+        add( authorLabel );
         add( usernameLabel );
         add( message );
         add( username );
