@@ -4,7 +4,7 @@ An application that allows for manual use of Discord webhooks, that can be used 
 # How does this work?
 By using Discord webhooks, you can create rich-embeds in your server. Here are a few tips:
 * To tag a user, use **<@userid>**
-* To tag a channel, use **<@channelid>**
+* To tag a channel, use **<#channelid>**
 
 # Downloads
 You can either compile this yourself by cloning this git repo, or download the JAR/EXE under the *Releases* tab.
